@@ -52,7 +52,7 @@ function App() {
     if(gamma <= 45 && gamma >= -45 && (beta > 170 || beta < -170)) {
       chooseimage()
     }
-    if(beta < 3 && beta >= -1 && gamma < 3 && gamma >= -1) {
+    if(beta < 3 && beta >= -1 && gamma <= 20 && gamma >= -20) {
       showans()
     }
     
@@ -66,7 +66,7 @@ function App() {
       <h2>beta: {Math.round(beta)}</h2>
       <h2>gamma: {Math.round(gamma)}</h2> */}
       {/* {} */}
-      {beta < 3 && beta >= -1 && gamma < 3 && gamma >= -1 && <h1 className='pinyin'>{chosenCharAns}</h1>}
+      {beta < 3 && beta >= -1 && gamma <= 20 && gamma >= -20 && <h1 className='pinyin'>{chosenCharAns}</h1>}
       {/* {beta < 95 && beta > 80 && <h1>upright</h1>} */}
       {((beta <= 20 && beta >= -20) || (beta >= 160 && beta <= -160)) && ((gamma <= -60 && gamma >= -90) || (gamma <= 90 && gamma >= 60)) && <h1 className='char'>{chosenChar}</h1>}
       {gamma <= 45 && gamma >= -45 && (beta > 170 || beta < -170) && <div>
