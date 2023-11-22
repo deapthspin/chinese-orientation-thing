@@ -93,15 +93,15 @@ function App() {
       <h2>beta: {Math.round(beta)}</h2>
       <h2>gamma: {Math.round(gamma)}</h2>
       {/* {} */}
-      {beta < 3 && beta >= -1 && gamma <= 20 && gamma >= -20 && <div>
+      {beta < 15 && beta >= -15 && gamma <= 25 && gamma >= -25 && <div>
         <h1 className='pinyin'>{chosenCharAns}</h1>
         {/* <button onClick={showans}>speak</button> */}
         <br/>
         <h2>{chosenCharDef}</h2>
       </div>}
       {/* {beta < 95 && beta > 80 && <h1>upright</h1>} */}
-      {((beta <= 20 && beta >= -20) || (beta >= 160 && beta <= -160)) && ((gamma <= -60 && gamma >= -90) || (gamma <= 90 && gamma >= 60)) && <h1 className='char'>{chosenChar}</h1>}
-      {gamma <= 45 && gamma >= -45 && (beta > 170 || beta < -170) && <div>
+      {((beta <= 35 && beta >= -35) || (beta >= 160 || beta <= -160)) && ((gamma <= -60 && gamma >= -90) || (gamma <= 90 && gamma >= 45)) && <h1 className='char'>{chosenChar}</h1>}
+      {gamma <= 45 && gamma >= -45 && ((beta > 155 || beta < -155)) && <div>
         
         <h1>picking words</h1>
       </div>}
