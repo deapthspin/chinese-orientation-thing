@@ -81,17 +81,14 @@ function App() {
 
   return (
     <div className="App">
-      <FormControl>
-        <FormControlLabel control={<Switch onChange={changeDifficulty} />} label={difficulty ? 'adult' : 'infant'}/>
-      </FormControl>
-      <br/>
+      
       <br/>
       <button onClick={handleClick}>enable</button>
       <br/>
       <br/>
-      <h2>alpha: {Math.round(alpha)}</h2>
+      {/* <h2>alpha: {Math.round(alpha)}</h2>
       <h2>beta: {Math.round(beta)}</h2>
-      <h2>gamma: {Math.round(gamma)}</h2>
+      <h2>gamma: {Math.round(gamma)}</h2> */}
       {/* {} */}
       {beta < 15 && beta >= -15 && gamma <= 25 && gamma >= -25 && <div>
         <h1 className='pinyin'>{chosenCharAns}</h1>
@@ -105,7 +102,9 @@ function App() {
         
         <h1>picking words</h1>
       </div>}
-     
+      <FormControl>
+        <FormControlLabel control={<Switch onChange={changeDifficulty} />} label={difficulty ? 'adult' : 'infant'}/>
+      </FormControl>
 
     </div>
   );
