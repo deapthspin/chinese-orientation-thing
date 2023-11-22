@@ -36,13 +36,17 @@ function App() {
   function chooseimage() {
     
     // console.log(data)
-    const infant = data.filter((item) => item.hsk_levl === 1)
-    const rand = Math.floor(Math.random() * 30)
-    if (difficulty) {
+    
+    
+    if (difficulty === true) {
+      const rand = Math.floor(Math.random() * data.length)
       setChosenChar(data[rand].charcter)
       setChosenCharAns(data[rand].pinyin)
       setChosenCharDef(data[rand].definition)
     } else {
+      const infant = data.filter((item) => item.hsk_levl === '1')
+      const rand = Math.floor(Math.random() * infant.length)
+      console.log(infant)
       setChosenChar(infant[rand].charcter)
       setChosenCharAns(infant[rand].pinyin)
       setChosenCharDef(infant[rand].definition)
