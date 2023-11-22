@@ -86,9 +86,9 @@ function App() {
       <button onClick={handleClick}>enable</button>
       <br/>
       <br/>
-      {/* <h2>alpha: {Math.round(alpha)}</h2>
+      <h2>alpha: {Math.round(alpha)}</h2>
       <h2>beta: {Math.round(beta)}</h2>
-      <h2>gamma: {Math.round(gamma)}</h2> */}
+      <h2>gamma: {Math.round(gamma)}</h2>
       {/* {} */}
       {beta < 15 && beta >= -15 && gamma <= 25 && gamma >= -25 && <div>
         <h1 className='pinyin'>{chosenCharAns}</h1>
