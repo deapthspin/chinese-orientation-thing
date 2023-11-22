@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/chinese-orientation-thing/static/css/main.bcf1141c.css",
-    "main.js": "/chinese-orientation-thing/static/js/main.817a40d8.js",
+    "main.js": "/chinese-orientation-thing/static/js/main.53fa5bfd.js",
     "index.html": "/chinese-orientation-thing/index.html",
     "main.bcf1141c.css.map": "/chinese-orientation-thing/static/css/main.bcf1141c.css.map",
-    "main.817a40d8.js.map": "/chinese-orientation-thing/static/js/main.817a40d8.js.map"
+    "main.53fa5bfd.js.map": "/chinese-orientation-thing/static/js/main.53fa5bfd.js.map"
   },
   "entrypoints": [
     "static/css/main.bcf1141c.css",
-    "static/js/main.817a40d8.js"
+    "static/js/main.53fa5bfd.js"
   ]
 }
