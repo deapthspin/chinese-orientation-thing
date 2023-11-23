@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 import data from './data.json'
-import { FormControl, FormControlLabel, Switch } from '@mui/material';
+import { FormControl, FormControlLabel, Slider, Switch } from '@mui/material';
 
 function App() {
   const [alpha, setAlpha] = useState(0)
@@ -12,7 +12,7 @@ function App() {
   const [chosenChar, setChosenChar] = useState('')
   const [chosenCharAns, setChosenCharAns] = useState('')
   const [chosenCharDef, setChosenCharDef] = useState('')
-  const [difficulty, setDifficulty] = useState(false)
+  const [difficulty, setDifficulty] = useState(1)
   const handleClick = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       // Handle iOS 13+ devices.
@@ -38,19 +38,16 @@ function App() {
     // console.log(data)
     
     
-    if (difficulty === true) {
-      const rand = Math.floor(Math.random() * data.length)
-      setChosenChar(data[rand].charcter)
-      setChosenCharAns(data[rand].pinyin)
-      setChosenCharDef(data[rand].definition)
-    } else {
-      const infant = data.filter((item) => item.hsk_levl === '1')
-      const rand = Math.floor(Math.random() * infant.length)
-      console.log(infant)
-      setChosenChar(infant[rand].charcter)
-      setChosenCharAns(infant[rand].pinyin)
-      setChosenCharDef(infant[rand].definition)
-    }
+    
+    
+    
+      const filtered = data.filter((item) => item.hsk_levl === `${difficulty}`)
+      const rand = Math.floor(Math.random() * filtered.length)
+      // console.log(infant)
+      setChosenChar(filtered[rand].charcter)
+      setChosenCharAns(filtered[rand].pinyin)
+      setChosenCharDef(filtered[rand].definition)
+    
 
   }
 
@@ -76,7 +73,7 @@ function App() {
   }, [beta, gamma])
 
   function changeDifficulty(e) {
-    setDifficulty(!difficulty)
+    setDifficulty(e.target.value)
   }
 
   return (
@@ -90,6 +87,7 @@ function App() {
       <h2>beta: {Math.round(beta)}</h2>
       <h2>gamma: {Math.round(gamma)}</h2> */}
       {/* {} */}
+
       {beta < 15 && beta >= -15 && gamma <= 25 && gamma >= -25 && <div>
         <h1 className='pinyin'>{chosenCharAns}</h1>
         {/* <button onClick={showans}>speak</button> */}
@@ -102,10 +100,35 @@ function App() {
         
         <h1>picking words</h1>
       </div>}
-      <FormControl>
+      {/* <FormControl>
         <FormControlLabel control={<Switch onChange={changeDifficulty} />} label={difficulty ? 'adult' : 'infant'}/>
-      </FormControl>
+      </FormControl> */}
 
+        <Slider
+          defaultValue={1}
+          step={1}
+          min={1}
+          max={6}
+          marks={
+            [
+              {
+                value: 1,
+                label: 'hsk level 1'
+              },
+              {
+                value: 6,
+                label: 'hsk level 6'
+              }
+            ]
+          }
+          onChange={changeDifficulty}
+          valueLabelDisplay='auto'
+          className='slider'
+        />
+
+        
+
+      
     </div>
   );
 }

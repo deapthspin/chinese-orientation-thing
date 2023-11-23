@@ -9,3 +9,7 @@
 .App {
     text-align: center;
 }
+
+.slider {
+    width: 400px !important;
+}
