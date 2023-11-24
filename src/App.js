@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
-import data from './data.json'
+import jsonData from './data.json'
 import { FormControl, FormControlLabel, Slider, Switch } from '@mui/material';
 import { useSwipeable } from 'react-swipeable';
 
@@ -15,6 +15,12 @@ function App() {
   const [chosenCharAns, setChosenCharAns] = useState('')
   const [chosenCharDef, setChosenCharDef] = useState('')
   const [difficulty, setDifficulty] = useState(1)
+  const [completed, setCompleted] = useState(false)
+  const[style, setStyle]= useState({
+    backgroundColor: `rgb(255,255,255)`
+  })
+  const [data,setData] = useState(jsonData)
+
   const handleClick = () => {
     if (typeof DeviceMotionEvent.requestPermission === 'function') {
       // Handle iOS 13+ devices.
@@ -34,8 +40,48 @@ function App() {
   }
 
   const handlers = useSwipeable({
-    onSwiped: (e) => console.log("User Swiped!", e),
+    onSwipedRight: (e) => userKnow(e),
+    onSwipedLeft: (e) => userNotKnow(e),
+    onSwiping: (e) => changeColour(e),
+    
   });
+
+  function userKnow(e) {
+    // console.log('know')
+    if (e.absX > 75 ) {
+      setCompleted(true)
+      setData(data.filter(item => item.charcter === chosenChar))
+      chooseimage()
+    }
+    setStyle({
+      backgroundColor: 'rgb(255,255,255)'
+    })
+
+  }
+
+  function changeColour(e) {
+    if (e.dir === 'Right' && e.absX <= 255) {
+      setStyle({
+        backgroundColor: `rgb(${255 - e.absX}, 255, ${255 -e.absX})`
+      })
+    } else if(e.dir === 'Left' && e.absX <= 255) {
+      setStyle({
+        backgroundColor: `rgb(255, ${255 - e.absX}, ${255 - e.absX})`
+      })
+    }
+    
+  }
+
+  function userNotKnow(e) {
+    // console.log('not know')
+    if (e.absX > 75 ) {
+      setCompleted(true)
+      chooseimage()
+    }
+    setStyle({
+      backgroundColor: 'rgb(255,255,255)'
+    })
+  }
   
 
   function chooseimage() {
@@ -44,7 +90,7 @@ function App() {
     
     
     
-    
+      
     
       const filtered = data.filter((item) => item.hsk_levl === `${difficulty}`)
       const rand = Math.floor(Math.random() * filtered.length)
@@ -69,12 +115,16 @@ function App() {
   }
   useEffect(() => {
     if(gamma <= 45 && gamma >= -45 && (beta > 170 || beta < -170)) {
+
+
       chooseimage()
     }
     // if(beta < 3 && beta >= -1 && gamma <= 20 && gamma >= -20) {
     //   showans()
     // }
-    
+    if(((beta <= 35 && beta >= -35) || (beta >= 160 || beta <= -160)) && ((gamma <= -35 && gamma >= -90) || (gamma <= 90 && gamma >= 35))) {
+      setCompleted(false)
+    }
   }, [beta, gamma])
 
   function changeDifficulty(e) {
@@ -92,12 +142,15 @@ function App() {
       <h2>beta: {Math.round(beta)}</h2>
       <h2>gamma: {Math.round(gamma)}</h2> */}
       {/* {} */}
-
+      {/* <div className='swipeable' {...handlers} style={style}></div> */}
       {beta < 15 && beta >= -15 && gamma <= 34 && gamma >= -34 && <div>
-        <h1 className='pinyin'>{chosenCharAns}</h1>
-        {/* <button onClick={showans}>speak</button> */}
-        <br/>
-        <h2>{chosenCharDef}</h2>
+        {!completed && <div className='swipeable' {...handlers} style={style}>
+          <h1 className='pinyin'>{chosenCharAns}</h1>
+          <br/>
+          <h2>{chosenCharDef}</h2>
+        </div>}
+        {completed && <h1>tilt phone up to view next word</h1>}
+
       </div>}
       {/* {beta < 95 && beta > 80 && <h1>upright</h1>} */}
       {((beta <= 35 && beta >= -35) || (beta >= 160 || beta <= -160)) && ((gamma <= -35 && gamma >= -90) || (gamma <= 90 && gamma >= 35)) && <h1 className='char'>{chosenChar}</h1>}
@@ -132,7 +185,7 @@ function App() {
         />
 
         
-          <div className='swipeable' {...handlers} ></div>
+        
       
     </div>
   );

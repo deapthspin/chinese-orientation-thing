@@ -15,7 +15,9 @@
 }
 
 .swipeable {
-    height: 100px;
-    width: 100px;
+    height: fit-content;
+    width: fit-content;
+    padding: 5px 60px;
     border: 1px solid black;
+    margin: auto;
 }
