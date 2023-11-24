@@ -50,7 +50,9 @@ function App() {
     // console.log('know')
     if (e.absX > 75 ) {
       setCompleted(true)
-      setData(data.filter(item => item.charcter === chosenChar))
+      // let newData = 
+      // console.log(newData, data)
+      setData(data.filter(item => item.charcter !== chosenChar))
       chooseimage()
     }
     setStyle({
@@ -93,11 +95,18 @@ function App() {
       
     
       const filtered = data.filter((item) => item.hsk_levl === `${difficulty}`)
-      const rand = Math.floor(Math.random() * filtered.length)
-      // console.log(infant)
-      setChosenChar(filtered[rand].charcter)
-      setChosenCharAns(filtered[rand].pinyin)
-      setChosenCharDef(filtered[rand].definition)
+      if(filtered.length >= 1) {
+        const rand = Math.floor(Math.random() * filtered.length)
+        // console.log(infant)
+        setChosenChar(filtered[rand].charcter)
+        setChosenCharAns(filtered[rand].pinyin)
+        setChosenCharDef(filtered[rand].definition)
+      } else {
+        setChosenChar(`you have finished hsk level ${difficulty}`)
+        setChosenCharAns('')
+        setChosenCharDef('')
+      }
+      
     
 
   }
