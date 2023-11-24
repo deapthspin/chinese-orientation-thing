@@ -4,6 +4,8 @@ import './App.css';
 
 import data from './data.json'
 import { FormControl, FormControlLabel, Slider, Switch } from '@mui/material';
+import { useSwipeable } from 'react-swipeable';
+
 
 function App() {
   const [alpha, setAlpha] = useState(0)
@@ -31,6 +33,9 @@ function App() {
     }
   }
 
+  const handlers = useSwipeable({
+    onSwiped: (e) => console.log("User Swiped!", e),
+  });
   
 
   function chooseimage() {
@@ -127,7 +132,7 @@ function App() {
         />
 
         
-
+          <div className='swipeable' {...handlers} ></div>
       
     </div>
   );
